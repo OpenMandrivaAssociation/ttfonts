@@ -17,10 +17,10 @@ BuildArch:	noarch
 BuildRoot:	%_tmppath/%name-%version-%release-root
 
 %description
-This package is a collection of free True Type Fonts.
+This package is a collection of free TrueType fonts.
 
 %package -n fonts-ttf-west_european
-Summary:	Free True Type Fonts (west eruopean charset)
+Summary:	Free TrueType fonts (West European charset)
 Group:		System/Fonts/True type
 Obsoletes:	ttfonts
 Requires(post):		chkfontpath
