@@ -1,11 +1,15 @@
-Name:		ttfonts
-Version:	1.3
-Release:	15mdk
+%define name ttfonts
+%define version 1.3
+%define release %mkrel 16
+
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
 License:	Freeware
-Summary:	Free True Type Fonts
+Summary:	Free TrueType fonts
 Group:		System/Fonts/True type 
 
-Source:		ttfonts-%{PACKAGE_VERSION}.tar.bz2
+Source:		ttfonts-%{version}.tar.bz2
 Source1:	fonts-ttf-west_european-fonts.dir.bz2
 Source2:	fonts-ttf-decoratives-fonts.dir.bz2
 
@@ -25,7 +29,7 @@ Requires(post): fontconfig
 Requires(postun): fontconfig
 
 %description -n fonts-ttf-west_european
-This package is a collection of free True Type Fonts.
+This package is a collection of free TrueType fonts.
 
 %package -n fonts-ttf-decoratives
 Summary:	Free True Type Fonts (decoratives)
@@ -36,7 +40,7 @@ Requires(post): fontconfig
 Requires(postun): fontconfig
 
 %description -n fonts-ttf-decoratives
-This package is a collection of free True Type Fonts.
+This package is a collection of free TrueType fonts.
 
 %prep
 %setup -q -n ttfonts 
@@ -50,12 +54,6 @@ mkdir -p $RPM_BUILD_ROOT%_datadir/fonts/ttf/western
 # decorative fonts, quite improper for normal use
 mkdir -p $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives
 
-# white space in names aren't a good idea
-# JMD: even renaming the font, it still gives bizarre results
-# JMD: let's just nuke the bastard
-#mv "beast wars.ttf" beast_wars.ttf
-#mv "beast wars.txt" beast_wars.txt
-
 mkdir western
 for i in Adventure Bluehigb Bluehigc Bluehigh a_d_mono babelfish \
 	dirtydoz fudd larabief 
@@ -65,7 +63,6 @@ do
 done 
 bzcat %{SOURCE1} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/western/fonts.dir
 bzcat %{SOURCE1} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/western/fonts.scale
-
 
 mkdir decoratives
 for i in CaptainPodd actionis bazaroni betadance betsy binary \
