@@ -1,6 +1,6 @@
 %define name ttfonts
 %define version 1.3
-%define release %mkrel 17
+%define release %mkrel 18
 
 Name:		%{name}
 Version:	%{version}
@@ -74,10 +74,10 @@ bzcat %{SOURCE2} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives/fonts.dir
 bzcat %{SOURCE2} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives/fonts.scale
 
 mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
-for dir in decoratives western; do
-	ln -s ../../..%_datadir/fonts/ttf/$dir \
-		%{buildroot}%_sysconfdir/X11/fontpath.d/$dir:pri=50
-done
+ln -s ../../..%_datadir/fonts/ttf/western \
+	%{buildroot}%_sysconfdir/X11/fontpath.d/ttf-west_european:pri=50
+ln -s ../../..%_datadir/fonts/ttf/decoratives \
+	%{buildroot}%_sysconfdir/X11/fontpath.d/ttf-decoratives:pri=50
 
 cp bluehigh.txt contourgenerator.txt western/
 cp betsy.readme.txt decoratives/
@@ -92,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/fonts/ttf/western/*.ttf
 %config(noreplace) %_datadir/fonts/ttf/western/fonts.scale
 %config(noreplace) %_datadir/fonts/ttf/western/fonts.dir
-%_sysconfdir/X11/fontpath.d/western:pri=50
+%_sysconfdir/X11/fontpath.d/ttf-west_european:pri=50
 
 %files -n fonts-ttf-decoratives
 %defattr (-,root,root)
@@ -101,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/fonts/ttf/decoratives/*.ttf
 %config(noreplace) %_datadir/fonts/ttf/decoratives/fonts.dir
 %config(noreplace) %_datadir/fonts/ttf/decoratives/fonts.scale
-%_sysconfdir/X11/fontpath.d/decoratives:pri=50
+%_sysconfdir/X11/fontpath.d/ttf-decoratives:pri=50
 
 %post -n fonts-ttf-west_european
 [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
