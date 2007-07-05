@@ -1,6 +1,6 @@
 %define name ttfonts
 %define version 1.3
-%define release %mkrel 16
+%define release %mkrel 17
 
 Name:		%{name}
 Version:	%{version}
@@ -23,8 +23,6 @@ This package is a collection of free TrueType fonts.
 Summary:	Free TrueType fonts (West European charset)
 Group:		System/Fonts/True type
 Obsoletes:	ttfonts
-Requires(post):		chkfontpath
-Requires(postun):	chkfontpath
 Requires(post): fontconfig
 Requires(postun): fontconfig
 
@@ -34,8 +32,6 @@ This package is a collection of free TrueType fonts.
 %package -n fonts-ttf-decoratives
 Summary:	Free True Type Fonts (decoratives)
 Group:		System/Fonts/True type
-Requires(post):		chkfontpath
-Requires(postun):	chkfontpath
 Requires(post): fontconfig
 Requires(postun): fontconfig
 
@@ -77,6 +73,12 @@ done
 bzcat %{SOURCE2} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives/fonts.dir
 bzcat %{SOURCE2} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives/fonts.scale
 
+mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
+for dir in decoratives western; do
+	ln -s ../../..%_datadir/fonts/ttf/$dir \
+		%{buildroot}%_sysconfdir/X11/fontpath.d/$dir:pri=50
+done
+
 cp bluehigh.txt contourgenerator.txt western/
 cp betsy.readme.txt decoratives/
 
@@ -90,6 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/fonts/ttf/western/*.ttf
 %config(noreplace) %_datadir/fonts/ttf/western/fonts.scale
 %config(noreplace) %_datadir/fonts/ttf/western/fonts.dir
+%_sysconfdir/X11/fontpath.d/western:pri=50
 
 %files -n fonts-ttf-decoratives
 %defattr (-,root,root)
@@ -98,24 +101,21 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/fonts/ttf/decoratives/*.ttf
 %config(noreplace) %_datadir/fonts/ttf/decoratives/fonts.dir
 %config(noreplace) %_datadir/fonts/ttf/decoratives/fonts.scale
+%_sysconfdir/X11/fontpath.d/decoratives:pri=50
 
 %post -n fonts-ttf-west_european
-[ -x %_sbindir/chkfontpath ] && %_sbindir/chkfontpath -q -a %_datadir/fonts/ttf/western
 [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
 
 %postun -n fonts-ttf-west_european
 if [ "$1" = "0" ];then
-  [ -x %_sbindir/chkfontpath ] && %_sbindir/chkfontpath -q -r %_datadir/fonts/ttf/western
   [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
 fi
 
 %post -n fonts-ttf-decoratives
-[ -x %_sbindir/chkfontpath ] && %_sbindir/chkfontpath -q -a %_datadir/fonts/ttf/decoratives
 [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
 
 %postun -n fonts-ttf-decoratives
 if [ "$1" = "0" ];then
-  [ -x %_sbindir/chkfontpath ] && %_sbindir/chkfontpath -q -r %_datadir/fonts/ttf/decoratives
   [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
 fi
 
