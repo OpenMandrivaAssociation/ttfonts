@@ -1,12 +1,12 @@
 %define name ttfonts
 %define version 1.3
-%define release %mkrel 18
+%define release %mkrel 19
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 License:	Freeware
-Summary:	Free TrueType fonts
+Summary:	TrueType fonts
 Group:		System/Fonts/True type 
 
 Source:		ttfonts-%{version}.tar.bz2
@@ -20,7 +20,7 @@ BuildRoot:	%_tmppath/%name-%version-%release-root
 This package is a collection of free TrueType fonts.
 
 %package -n fonts-ttf-west_european
-Summary:	Free TrueType fonts (West European charset)
+Summary:	TrueType fonts (West European charset)
 Group:		System/Fonts/True type
 Obsoletes:	ttfonts
 Requires(post): fontconfig
@@ -30,7 +30,7 @@ Requires(postun): fontconfig
 This package is a collection of free TrueType fonts.
 
 %package -n fonts-ttf-decoratives
-Summary:	Free True Type Fonts (decoratives)
+Summary:	True Type Fonts (decoratives)
 Group:		System/Fonts/True type
 Requires(post): fontconfig
 Requires(postun): fontconfig
