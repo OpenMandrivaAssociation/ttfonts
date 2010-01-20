@@ -1,6 +1,6 @@
 %define name ttfonts
 %define version 1.3
-%define release %mkrel 21
+%define release %mkrel 22
 
 Name:		%{name}
 Version:	%{version}
@@ -23,8 +23,6 @@ This package is a collection of free TrueType fonts.
 Summary:	TrueType fonts (West European charset)
 Group:		System/Fonts/True type
 Obsoletes:	ttfonts
-Requires(post): fontconfig
-Requires(postun): fontconfig
 
 %description -n fonts-ttf-west_european
 This package is a collection of free TrueType fonts.
@@ -32,8 +30,6 @@ This package is a collection of free TrueType fonts.
 %package -n fonts-ttf-decoratives
 Summary:	True Type Fonts (decoratives)
 Group:		System/Fonts/True type
-Requires(post): fontconfig
-Requires(postun): fontconfig
 
 %description -n fonts-ttf-decoratives
 This package is a collection of free TrueType fonts.
@@ -102,20 +98,4 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_datadir/fonts/ttf/decoratives/fonts.dir
 %config(noreplace) %_datadir/fonts/ttf/decoratives/fonts.scale
 %_sysconfdir/X11/fontpath.d/ttf-decoratives:pri=50
-
-%post -n fonts-ttf-west_european
-[ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
-
-%postun -n fonts-ttf-west_european
-if [ "$1" = "0" ];then
-  [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
-fi
-
-%post -n fonts-ttf-decoratives
-[ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
-
-%postun -n fonts-ttf-decoratives
-if [ "$1" = "0" ];then
-  [ -x %_bindir/fc-cache ] && %_bindir/fc-cache 
-fi
 
