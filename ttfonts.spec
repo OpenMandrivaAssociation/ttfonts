@@ -14,6 +14,7 @@ Source1:	fonts-ttf-west_european-fonts.dir.bz2
 Source2:	fonts-ttf-decoratives-fonts.dir.bz2
 
 BuildArch:	noarch
+BuildRequires: fontconfig
 BuildRoot:	%_tmppath/%name-%version-%release-root
 
 %description
