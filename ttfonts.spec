@@ -41,21 +41,21 @@ This package is a collection of free TrueType fonts.
 %build
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 # iso8858-{1,15} and ascii-0 fonts
-mkdir -p $RPM_BUILD_ROOT%_datadir/fonts/ttf/western
+mkdir -p %{buildroot}%_datadir/fonts/ttf/western
 # decorative fonts, quite improper for normal use
-mkdir -p $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives
+mkdir -p %{buildroot}%_datadir/fonts/ttf/decoratives
 
 mkdir western
 for i in Adventure Bluehigb Bluehigc Bluehigh a_d_mono babelfish \
 	dirtydoz fudd larabief 
 do
-  install -m444 $i.ttf $RPM_BUILD_ROOT%_datadir/fonts/ttf/western
+  install -m444 $i.ttf %{buildroot}%_datadir/fonts/ttf/western
   cp $i.txt western || :
 done 
-bzcat %{SOURCE1} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/western/fonts.dir
-bzcat %{SOURCE1} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/western/fonts.scale
+bzcat %{SOURCE1} > %{buildroot}%_datadir/fonts/ttf/western/fonts.dir
+bzcat %{SOURCE1} > %{buildroot}%_datadir/fonts/ttf/western/fonts.scale
 
 mkdir decoratives
 for i in CaptainPodd actionis bazaroni betadance betsy binary \
@@ -64,11 +64,11 @@ for i in CaptainPodd actionis bazaroni betadance betsy binary \
 	fakerece flubber fontrstc goldengi hydrogen ikarrg ikart \
 	ikarv independ indigo
 do
-  install -m444 $i.ttf $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives
+  install -m444 $i.ttf %{buildroot}%_datadir/fonts/ttf/decoratives
   cp $i.txt decoratives || :
 done
-bzcat %{SOURCE2} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives/fonts.dir
-bzcat %{SOURCE2} > $RPM_BUILD_ROOT%_datadir/fonts/ttf/decoratives/fonts.scale
+bzcat %{SOURCE2} > %{buildroot}%_datadir/fonts/ttf/decoratives/fonts.dir
+bzcat %{SOURCE2} > %{buildroot}%_datadir/fonts/ttf/decoratives/fonts.scale
 
 mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
 ln -s ../../..%_datadir/fonts/ttf/western \
@@ -80,7 +80,7 @@ cp bluehigh.txt contourgenerator.txt western/
 cp betsy.readme.txt decoratives/
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -n fonts-ttf-west_european
 %defattr (-,root,root)
