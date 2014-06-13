@@ -1,6 +1,6 @@
 %define name ttfonts
 %define version 1.3
-%define release 31
+%define release 32
 
 Name:		%{name}
 Version:	%{version}
