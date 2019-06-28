@@ -4,7 +4,7 @@
 
 Name:		%{name}
 Version:	%{version}
-Release:	%{release}
+Release:	1
 License:	Freeware
 Summary:	TrueType fonts
 Group:		System/Fonts/True type 
