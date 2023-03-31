@@ -1,6 +1,6 @@
 Name:		ttfonts
 Version:	1.4
-Release:	%mkrel 7
+Release:	8
 License:	Freeware
 Summary:	TrueType fonts
 Group:		System/Fonts/True type 
